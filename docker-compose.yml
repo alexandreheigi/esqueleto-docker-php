@@ -1,0 +1,48 @@
+version: '3'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www
+    ports:
+      - "8098:8000" # Ajuste a porta conforme necessário
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb
+    networks:
+      - unialfa
+
+  mysqldb:
+    container_name: mysqlunialfa
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '3307:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=unialfa
+    networks:
+      - unialfa
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - mysqldb
+    environment:
+      PMA_HOST: mysqlunialfa
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+    networks:
+      - unialfa
+
+networks:
+  unialfa:
+    name: unialfa
+    driver: bridge

@@ -1,0 +1,15 @@
+{
+    "name": "alexmorgado/phpdocker",
+    "autoload": {
+        "psr-4": {
+            "Unialfa\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "alexmpereira",
+            "email": "alexmpereiradev@gmail.com"
+        }
+    ],
+    "require": {}
+}
