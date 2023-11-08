@@ -12,8 +12,11 @@ $dbname = "pedidos";
 
 $db = new DatabaseConnection($host, $port, $username, $password, $dbname);
 
-$query = "SELECT * FROM pedido";
+$query = "INSERT INTO `pedido` (`id`, `nome`, `valor`) VALUES (NULL, 'Mac', 6000.98)";
 $result = $db->query($query);
-print_r($result->fetchAll(PDO::FETCH_OBJ));
+
+echo "<pre>";
+echo "<h1>Pedido adicionado com sucesso.</h1>";
+echo "</pre>";
 
 $db->closeConnection();
